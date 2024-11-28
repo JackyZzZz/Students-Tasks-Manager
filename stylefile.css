@@ -23,6 +23,21 @@ h1 {
     padding: 5px 10px;
 }
 
+#due-date-section {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#enable-due-date {
+    margin-right: 5px;
+}
+
+#due-date {
+    padding: 5px;
+    display: none;
+}
+
 #task-list {
     max-width: 600px;
     margin: 0 auto;
