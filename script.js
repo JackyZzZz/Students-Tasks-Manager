@@ -74,7 +74,7 @@ function displayTask(task) {
     taskList.appendChild(taskDiv);
 }
 
-window.onload = function() {
+window.onload = async function() {
     let tasks = [];
     if (localStorage.getItem('tasks') !== null) {
         tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -82,15 +82,22 @@ window.onload = function() {
     tasks.forEach(function(task) {
         displayTask(task);
     });
-};
-
-
-function ToSignUp() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('signup-form').style.display = 'flex';
 }
 
-function ToLogin() {
-    document.getElementById('signup-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'flex';
+
+async function fetchMotivationalQuote() {
+    try {
+        const response = await fetch('https://programming-quotesapi.vercel.app/api/random');
+        if (!response.ok) {
+            throw new Error('Failed to fetch quote');
+        }
+        const quote = await response.json();
+        document.getElementById('quote').innerText = `"${quote.quote}" - ${quote.author}`;
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+        document.getElementById('quote').innerText = "Failed to fetch quote. Please try again later.";
+    }
 }
+fetchMotivationalQuote();
+
+

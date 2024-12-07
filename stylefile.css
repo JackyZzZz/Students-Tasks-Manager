@@ -63,6 +63,24 @@ h1 {
     background-color: green;
 }
 
+#quote-section {
+    margin: 20px auto;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 600px;
+    font-style: italic;
+    color: #333;
+    font-size: 16px;
+}
+
+#quote {
+    margin: 0;
+}
+
+
 @media (max-width: 600px) {
     #task-form {
         flex-direction: column;
@@ -77,38 +95,3 @@ h1 {
     }
 }
 
-
-#auth-forms div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-#auth-forms div[style="display: none;"] {
-    display: none; /* Ensure hidden forms remain hidden */
-}
-
-#auth-forms input {
-    margin: 5px 0;
-    padding: 5px;
-    width: 200px;
-}
-
-#auth-forms button {
-    padding: 5px;
-    margin: 10px 0;
-    /*width: 100px;*/
-}
-
-#auth-forms p {
-    margin: 10px 0;
-    font-size: 14px;
-}
-
-#auth-forms a {
-    text-decoration: none;
-    color: blue;
-    cursor: pointer;
-}
