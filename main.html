@@ -7,6 +7,23 @@
 </head>
 <body>
     <h1>Students Tasks Manager</h1>
+    <div id="auth-forms">
+        <div id="login-form">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email">
+            <input type="password" id="login-password" placeholder="Password">
+            <button id="login-btn">Login</button>
+            <p id="switch-to-signup">No account? <a href="#" onclick="ToSignUp()">Create an account for free!</a></p>
+        </div>
+        
+        <div id="signup-form" style="display: none;">
+            <h2>Sign Up</h2>
+            <input type="email" id="signup-email" placeholder="Email">
+            <input type="password" id="signup-password" placeholder="Password">
+            <button id="signup-btn">Sign Up</button>
+            <p id="switch-to-login">Already have an account? <a href="#" onclick="ToLogin()">Login to your account</a></p>
+        </div>
+    </div>
     <div id="task-form">
         <input type="text" id="task-name" placeholder="Task Name">
         <select id="priority-level">
