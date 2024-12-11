@@ -48,6 +48,9 @@ h1 {
     margin-bottom: 5px;
     color: white;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .high {
@@ -80,6 +83,54 @@ h1 {
     margin: 0;
 }
 
+.task-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 3px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    opacity: 0.8;
+}
+
+.edit-task-name, .edit-priority, .edit-due-date {
+    margin: 2px;
+    padding: 3px;
+}
+
+.save-edit-btn, .cancel-edit-btn {
+    margin: 2px;
+    padding: 3px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.save-edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cancel-edit-btn {
+    background-color: #f44336;
+    color: white;
+}
 
 @media (max-width: 600px) {
     #task-form {
