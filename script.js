@@ -12,6 +12,7 @@ document.getElementById('enable-due-date').addEventListener('change', function (
 
 function addTask() {
     let taskName = document.getElementById('task-name').value.trim();
+    let taskNotes = document.getElementById('task-notes').value.trim();
     let priorityLevel = document.getElementById('priority-level').value;
     let dueDateCheckbox = document.getElementById('enable-due-date').checked;
     let dueDate = dueDateCheckbox ? document.getElementById('due-date').value : null;
@@ -28,15 +29,17 @@ function addTask() {
 
     let task = {
         name: taskName,
+        notes: taskNotes,
         priority: priorityLevel,
         dueDate: dueDate
     };
 
     saveTask(task);
-
     displayTask(task);
 
+    // Clear form
     document.getElementById('task-name').value = '';
+    document.getElementById('task-notes').value = '';
     document.getElementById('enable-due-date').checked = false;
     document.getElementById('due-date').style.display = 'none';
     document.getElementById('due-date').value = '';
@@ -53,7 +56,7 @@ function displayTask(task) {
     let taskList = document.getElementById('task-list');
     let taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
-    taskDiv.dataset.taskId = task.id || Date.now(); // Add unique ID to each task
+    taskDiv.dataset.taskId = task.id || Date.now();
 
     if (task.priority === 'high') {
         taskDiv.classList.add('high');
@@ -67,6 +70,7 @@ function displayTask(task) {
         <div class="task-content">
             <strong>${task.name}</strong> - ${task.priority} priority
             ${task.dueDate ? ` | Due: ${task.dueDate}` : ''}
+            ${task.notes ? `<div class="task-notes">${task.notes}</div>` : ''}
         </div>
         <div class="task-buttons">
             <button class="edit-btn">Edit</button>
@@ -75,7 +79,6 @@ function displayTask(task) {
     `;
 
     taskDiv.innerHTML = taskContent;
-
     taskDiv.querySelector('.edit-btn').addEventListener('click', () => editTask(taskDiv, task));
     taskDiv.querySelector('.delete-btn').addEventListener('click', () => deleteTask(taskDiv, task));
 
@@ -89,6 +92,7 @@ function editTask(taskDiv, task) {
     const editForm = document.createElement('div');
     editForm.innerHTML = `
         <input type="text" class="edit-task-name" value="${task.name}">
+        <textarea class="edit-task-notes">${task.notes || ''}</textarea>
         <select class="edit-priority">
             <option value="high" ${task.priority === 'high' ? 'selected' : ''}>High Priority</option>
             <option value="medium" ${task.priority === 'medium' ? 'selected' : ''}>Medium Priority</option>
@@ -101,9 +105,9 @@ function editTask(taskDiv, task) {
 
     taskContent.replaceWith(editForm);
 
-    // Add event listeners for save and cancel
     editForm.querySelector('.save-edit-btn').addEventListener('click', () => {
         const newName = editForm.querySelector('.edit-task-name').value.trim();
+        const newNotes = editForm.querySelector('.edit-task-notes').value.trim();
         const newPriority = editForm.querySelector('.edit-priority').value;
         const newDueDate = editForm.querySelector('.edit-due-date').value;
 
@@ -113,12 +117,11 @@ function editTask(taskDiv, task) {
         }
 
         task.name = newName;
+        task.notes = newNotes;
         task.priority = newPriority;
         task.dueDate = newDueDate || null;
 
         updateTaskInStorage(task);
-
-
         taskDiv.remove();
         displayTask(task);
     });
