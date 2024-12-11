@@ -100,4 +100,10 @@ async function fetchMotivationalQuote() {
 }
 fetchMotivationalQuote();
 
+window.onload = async function() {
+    localStorage.removeItem('tasks');
+    let taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+    await fetchMotivationalQuote();
+};
 
